@@ -1,0 +1,65 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+#sensor: !include sensor.yaml
+
+mqtt:
+    binary_sensor:
+      - unique_id: binary_sensor.garage_pir
+        name: "garage_pir Sensor"
+        state_topic: "sensor/Garage_Temp_PIR/PIR1"
+        qos: 1
+        payload_on: "ON"
+        payload_not_available: "OFF"
+        device_class: motion
+
+    sensor:
+      - name: "Backyard Temperature"
+        state_topic: "tele/ESP32_TEMPERATURE_HUB/SENSOR"
+        value_template: '{{ value_json.ATC19f133.Temperature }}'
+        icon: mdi:thermometer-bluetooth
+      
+      - name: "Kid1_room Temperature"
+        state_topic: "tele/ESP32_TEMPERATURE_HUB/SENSOR"
+        value_template: '{{ value_json.ATC6570e7.Temperature }}'
+        icon: mdi:thermometer-bluetooth
+
+      - name: "Kid2_room Temperature"
+        state_topic: "tele/ESP32_TEMPERATURE_HUB/SENSOR"
+        value_template: '{{ value_json.ATC969ab4.Temperature }}'
+        icon: mdi:thermometer-bluetooth
+      
+      - name: "kitchen Temperature"
+        state_topic: "tele/ESP32_TEMPERATURE_HUB/SENSOR"
+        value_template: '{{ value_json.ATCad7637.Temperature }}'
+        icon: mdi:thermometer-bluetooth
+      
+      - name: "Master Bedroom Temperature"
+        state_topic: "tele/ESP32_TEMPERATURE_HUB/SENSOR"
+        value_template: '{{ value_json.ATC5d22d1.Temperature }}'
+        icon: mdi:thermometer-bluetooth
+    
+sensor:    
+  - platform: time_date
+    display_options:
+    - 'date_time'
+      
+  - platform: worldclock
+    time_zone: America/Sao_Paulo
+
+
+http: 
+ ssl_certificate: /ssl/fullchain.pem 
+ ssl_key: /ssl/privkey.pem

@@ -1,0 +1,40 @@
+blueprint:
+    name: Automation 1 Blueprint
+    description: Turn on and off a light after sunset if a movement is detected
+    domain: automation
+    input:
+        motion_sensor:
+            name: Motion Sensor
+            description: Motion Sensor to activate lights
+            selector:
+                entity:
+                    domain: binary_sensor
+                    device_class: motion
+        target_light:
+            name: Lights
+            description: Lights activated by Motion Sensor
+            selector:
+                target:
+                    entity:
+                        domain: light
+
+trigger:
+    - platform: state
+      entity_id: !input motion_sensor
+
+condition:
+  - condition: sun
+    after: sunset
+
+action:
+    - service: light.turn_on
+      target: !input target_light
+
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 0
+        milliseconds: 0
+    
+    - service: light.turn_off
+      target: !input target_light

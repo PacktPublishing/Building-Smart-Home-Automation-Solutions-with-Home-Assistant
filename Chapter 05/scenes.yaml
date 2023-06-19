@@ -1,0 +1,18 @@
+- id: '1676691530760'
+  name: ALL OFF
+  entities:
+    switch.desk_outlet:
+      friendly_name: Desk outlet
+      state: 'off'
+    light.garagelights:
+      supported_color_modes:
+      - onoff
+      friendly_name: GarageLights
+      supported_features: 0
+      state: 'off'
+  icon: mdi:home-off
+  metadata:
+    switch.desk_outlet:
+      entity_only: true
+    light.garagelights:
+      entity_only: true

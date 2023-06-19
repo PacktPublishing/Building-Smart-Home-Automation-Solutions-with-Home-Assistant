@@ -1,0 +1,130 @@
+- id: '1676776939743'
+  alias: Automation 1
+  description: Turn on and off the Garage lights at night if a movement is detected
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_pir_sensor
+  condition:
+  - condition: sun
+    after: sunset
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.garagelights
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.garagelights
+  mode: single
+- id: '1676777500364'
+  alias: Automation 2
+  description: Turn off the Screen Monitor plug in my kid’s room after 8:30PM in the
+    work week days
+  trigger:
+  - platform: time
+    at: '20:30:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      device_id: e9f3cf638163b4c94f453c0a103fa407
+  mode: single
+- id: '1676778448636'
+  alias: Automation 3 Blueprint
+  description: Automation 1 Blueprint example
+  use_blueprint:
+    path: Automation1_blueprint.yaml
+    input:
+      motion_sensor: binary_sensor.garage_pir_sensor
+      target_light:
+        entity_id: light.garagelights
+- id: '1676779040603'
+  alias: Automation 4
+  description: Turn off the Screen Monitor plug in my kid’s room after 8:30PM in the
+    work week days
+  trigger:
+  - platform: time
+    at: '20:30:00'
+  condition: []
+  action:
+  - service: script.timeforbed
+    data: {}
+  mode: single
+- id: '1683004673810'
+  alias: LED_strip_controller
+  description: Control the LED Strip controller
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition:
+  - condition: template
+    value_template: "{% if (now().month == 5 or now().month == 5) %}\n  true\n{% else
+      %}\n  false\n{% endif %}"
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      device_id: b7dd623c10b090ec8dd727124d5344b2
+  - if:
+    - condition: template
+      value_template: "{% if now().month == 5 %}\n  true\n{% else %}\n  false\n{%
+        endif %}"
+    then:
+    - service: select.select_option
+      data:
+        option: Halloween
+      target:
+        entity_id: select.wled_playlist
+    else:
+    - service: select.select_option
+      data:
+        option: Christmas
+      target:
+        entity_id: select.wled_playlist
+  - delay:
+      hours: 4
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: b7dd623c10b090ec8dd727124d5344b2
+  mode: single
+- id: '1683093884867'
+  description: ''
+  trigger: []
+  condition: []
+  action: []
+  mode: single
+- id: '1684728222376'
+  alias: Ios toggle mb fan
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: Control MB Fan
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.1001257d12
+  mode: single

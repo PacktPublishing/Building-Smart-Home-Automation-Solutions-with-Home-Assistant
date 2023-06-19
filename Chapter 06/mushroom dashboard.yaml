@@ -1,0 +1,84 @@
+views:
+  - title: Home
+    cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: weather
+            entity: weather.forecast_home
+            show_conditions: true
+            show_temperature: true
+          - type: entity
+            entity: script.timeforbed
+            icon_color: blue-grey
+            use_entity_picture: false
+          - type: entity
+            entity: scene.all_off
+            content_info: name
+            icon_color: green
+        alignment: center
+      - type: custom:mushroom-template-card
+        primary: Hello, {{user}}
+        secondary: ''
+        icon: mdi:home
+      - type: custom:mushroom-title-card
+        title: Rooms
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Home
+            secondary: ''
+            icon: mdi:home
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: ''
+            icon_color: red
+          - type: custom:mushroom-template-card
+            primary: Garage
+            secondary: ''
+            icon: mdi:garage
+            icon_color: green
+            layout: vertical
+            tap_action:
+              action: navigate
+              navigation_path: ''
+          - type: custom:mushroom-template-card
+            primary: |-
+              Master 
+              Bedroom
+            secondary: ''
+            icon: mdi:home
+            icon_color: purple
+            layout: vertical
+          - type: custom:mushroom-template-card
+            primary: |-
+              Living
+              Room
+            secondary: ''
+            icon: mdi:sofa
+            icon_color: amber
+            layout: vertical
+      - type: custom:mushroom-title-card
+        title: Devices
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.garagelights
+            name: Garage
+            icon_color: amber
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-dependencies/0
+            hold_action:
+              action: toggle
+          - type: custom:mushroom-media-player-card
+            entity: media_player.lg_webos_tv_um7300aue
+            name: TV
+            media_controls: []
+            volume_controls: []
+            tap_action:
+              action: navigate
+              navigation_path: ''
+            hold_action:
+              action: toggle
+title: Mushroom

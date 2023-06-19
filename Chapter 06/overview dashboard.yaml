@@ -1,0 +1,173 @@
+title: family_name_Home
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - show_current: true
+        show_forecast: true
+        type: weather-forecast
+        entity: weather.forecast_home
+        theme: happy
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: sensor.date_time
+            state_color: false
+          - type: entity
+            entity: sensor.worldclock_sensor
+            name: Brazil Time
+          - type: entity
+            entity: sun.sun
+      - type: glance
+        entities:
+          - entity: person.your_name_and_family_name
+          - entity: person.your_wife
+          - entity: person.your_kid1
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: automation.automation_1
+              - entity: automation.automation_2
+              - entity: automation.automation_3_blueprint
+              - entity: automation.automation_4
+            title: Automation
+          - type: horizontal-stack
+            cards:
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: scene.all_off
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: script.timeforbed
+      - type: picture-elements
+        elements:
+          - type: state-icon
+            title: Master Bedroom Switch TV
+            entity: switch.master_bedroom_tv
+            style:
+              top: 68%
+              left: 70%
+              font-size: 10px
+          - type: icon
+            title: Master Bedroom Fan
+            icon: mdi:fan
+            entity: switch.1001257d12
+            style:
+              top: 35%
+              left: 70%
+              font-size: 10px
+          - type: state-icon
+            title: Master Bedroom Lights
+            entity: switch.100125c00d
+            style:
+              top: 30%
+              left: 70%
+              font-size: 10px
+          - type: state-badge
+            title: Master Bedroom Door Sensor
+            entity: binary_sensor.master_bedroom_backyard_door
+            style:
+              top: 90%
+              left: 80%
+              font-size: 10px
+        image: /local/mb_floorplan.png
+  - title: Dependencies
+    path: d
+    icon: ''
+    subview: false
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.garagetemppir_bmp280_temperature
+          - entity: binary_sensor.garage_pir_sensor
+          - entity: light.garagelights
+        title: Garage
+        state_color: false
+      - type: entities
+        entities:
+          - entity: binary_sensor.master_bedroom_backyard_door
+          - entity: switch.master_bedroom_tv
+          - entity: switch.1001257d12
+          - entity: switch.100125c00d
+        title: Master Bedroom
+        show_header_toggle: true
+      - type: entities
+        entities:
+          - entity: binary_sensor.front_door_motion
+          - entity: binary_sensor.front_door
+          - entity: switch.10011dc05f
+          - entity: switch.diningroomlamp1
+        title: Dinning Room
+      - type: entities
+        entities:
+          - entity: binary_sensor.kitchen_backyard_door
+          - entity: switch.coffeemaker
+        title: Kitchen
+      - type: entities
+        entities:
+          - entity: switch.desk_outlet
+          - entity: switch.10011f1632
+        title: Kid Bedroom 1
+      - type: entities
+        entities:
+          - entity: binary_sensor.garage_door
+          - entity: switch.10011ec33d
+        title: Laundry
+      - type: entities
+        entities:
+          - entity: media_player.lg_webos_tv_um7300aue
+        title: Living Room
+      - type: entities
+        entities:
+          - entity: binary_sensor.blink_theo_monitor_motion_detected
+          - entity: camera.blink_theo_monitor
+        title: Kid bedroom 2
+  - theme: Backend-selected
+    title: Devices
+    path: devices
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.front_door
+              - entity: binary_sensor.garage_door
+              - entity: binary_sensor.kitchen_backyard_door
+              - entity: binary_sensor.master_bedroom_backyard_door
+            title: Door Sensors
+          - type: entities
+            entities:
+              - entity: sensor.garagetemppir_bmp280_temperature
+            title: Temperature Sensors
+          - type: entities
+            entities:
+              - entity: binary_sensor.blink_theo_monitor_motion_detected
+              - entity: binary_sensor.front_door_motion
+              - entity: binary_sensor.garage_pir_sensor
+            title: Motion Sensors
+      - type: entities
+        entities:
+          - entity: switch.desk_outlet
+          - entity: switch.coffeemaker
+          - entity: switch.diningroomlamp1
+          - entity: switch.10011dc05f
+          - entity: switch.10011ec33d
+          - entity: switch.master_bedroom_tv
+          - entity: switch.1001257d12
+          - entity: switch.100125c00d
+          - entity: switch.10011f1632
+          - entity: switch.wled_sw
+        title: Switches
+      - type: media-control
+        entity: media_player.vitor_speaker
+      - type: media-control
+        entity: media_player.lg_webos_tv_um7300aue

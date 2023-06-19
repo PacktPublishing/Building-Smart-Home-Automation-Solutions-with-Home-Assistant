@@ -1,0 +1,87 @@
+views:
+  - theme: Backend-selected
+    title: GARAGE
+    badges: []
+    cards:
+      - type: light
+        entity: light.garagelights
+        name: Lights
+      - hours_to_show: 24
+        graph: line
+        type: sensor
+        entity: sensor.garagetemppir_bmp280_temperature
+        detail: 1
+        name: Temperature
+        unit: C
+      - hours_to_show: 24
+        graph: line
+        type: sensor
+        entity: sensor.garagetemppir_bmp280_pressure
+        detail: 1
+        name: Pressure
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.garage_pir_sensor
+          - entity: binary_sensor.garage_door
+        title: Motion
+        hours_to_show: 1
+      - type: entity
+        entity: binary_sensor.garage_pir_sensor
+        state_color: true
+        name: Motion Sensor
+      - type: entity
+        entity: binary_sensor.garage_door
+        name: Door
+        state_color: true
+  - theme: Backend-selected
+    title: MASTER BEDROOM
+    path: master-bedroom
+    badges: []
+    cards: []
+  - theme: Backend-selected
+    title: LIVING ROOM
+    path: living-room
+    badges: []
+    cards: []
+  - theme: Backend-selected
+    title: DINNING ROOM
+    path: dinning-room
+    badges: []
+    cards: []
+  - theme: Backend-selected
+    title: KITCHEN
+    path: kitchen
+    badges: []
+    cards: []
+  - theme: Backend-selected
+    title: KID BEDROOM 1
+    path: kid-bedroom-1
+    badges: []
+    cards:
+      - show_name: true
+        show_icon: true
+        type: button
+        tap_action:
+          action: toggle
+        entity: switch.desk_outlet
+        icon: mdi:desk-lamp
+      - show_name: true
+        show_icon: true
+        type: button
+        tap_action:
+          action: toggle
+        entity: switch.10011f1632
+        icon: mdi:fan
+        show_state: true
+        name: Fan
+  - theme: Backend-selected
+    title: KID BEDROOM 2
+    path: kid-bedroom-2
+    badges: []
+    cards: []
+  - theme: Backend-selected
+    title: LAUNDRY
+    path: laundry
+    badges: []
+    cards: []
+title: Dependencies
